@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2e+hYmiG0rE=",
+  "dgSpecHash": "n9mtO3qrorA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\HardshipAPI.csproj",
+  "projectFilePath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\HardshipAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zhuju\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\zhuju\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

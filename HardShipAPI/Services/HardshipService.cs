@@ -9,9 +9,9 @@ namespace HardshipAPI.Services
         Task<long> AddHardship(HardshipInsert hardship);
         Task<long> UpdateHardship(HardshipUpdate hardship);
         Task<HardshipManagementView[]> ViewAllHardShips();
-        Hardship? GetHardship(long hardshipId);
-        Task<bool> DoesDebtHaveHardshipAsync(long debtId); // Add this line
-        Task<HardshipManagementView?> GetHardshipByDebtIdAsync(long debtId); // Add this line
+        Hardship? GetHardship(int hardshipId);
+        Task<bool> DoesDebtHaveHardshipAsync(int debtId); // Add this line
+        Task<HardshipManagementView?> GetHardshipByDebtIdAsync(int debtId); // Add this line
 
     }
     public class HardshipService : IHardshipService
@@ -59,7 +59,7 @@ namespace HardshipAPI.Services
             return await cmd.ExecuteNonQueryAsync();
         }
 
-        public Hardship? GetHardship(long hardshipId)
+        public Hardship? GetHardship(int hardshipId)
         {
             using var connection = _sqliteService.GetConnection();
             connection.Open();
@@ -74,9 +74,9 @@ namespace HardshipAPI.Services
             {
                 return new Hardship
                 {
-                    HardshipID = reader.GetInt64(0),
+                    HardshipID = reader.GetInt32(0),
                     HardshipTypeID = reader.GetInt16(1),
-                    DebtID = reader.GetInt64(2),
+                    DebtID = reader.GetInt32(2),
                     Comments = reader.IsDBNull(3) ? null : reader.GetString(3)
                 };
             }
@@ -117,7 +117,7 @@ namespace HardshipAPI.Services
             }
             return results.ToArray();
         }
-        public async Task<bool> DoesDebtHaveHardshipAsync(long debtId)
+        public async Task<bool> DoesDebtHaveHardshipAsync(int debtId)
         {
             await using var connection = _sqliteService.GetConnection();
             await connection.OpenAsync();
@@ -130,7 +130,7 @@ namespace HardshipAPI.Services
             return result != null;
         }
 
-        public async Task<HardshipManagementView?> GetHardshipByDebtIdAsync(long debtId)
+        public async Task<HardshipManagementView?> GetHardshipByDebtIdAsync(int debtId)
         {
             await using var connection = _sqliteService.GetConnection();
             await connection.OpenAsync();

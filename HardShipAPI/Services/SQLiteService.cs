@@ -73,7 +73,7 @@ namespace HardshipAPI.Services
                 ('Medical'),
                 ('Economic');
             
-        ");
+            ");
 
             ExecuteNonQuery(connection, @"
             INSERT INTO Debt (Name, DOB, Income, Expenses)
@@ -87,7 +87,7 @@ namespace HardshipAPI.Services
                  ('Test Acount7', '1998-03-31',NULL,NULL),
                  ('Test Acount8', '1998-03-31',NULL,NULL),
                  ('Test Acount9', '1998-03-31',NULL,NULL);
-        ");
+            ");
 
         }
 

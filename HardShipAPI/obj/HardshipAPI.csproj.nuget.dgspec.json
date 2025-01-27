@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\HardshipAPI.csproj": {}
+    "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\HardshipAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\HardshipAPI.csproj": {
+    "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\HardshipAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\HardshipAPI.csproj",
+        "projectUniqueName": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\HardshipAPI.csproj",
         "projectName": "HardshipAPI",
-        "projectPath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\HardshipAPI.csproj",
+        "projectPath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\HardshipAPI.csproj",
         "packagesPath": "C:\\Users\\zhuju\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipAPI\\HardShipAPI\\obj\\",
+        "outputPath": "C:\\Users\\zhuju\\Desktop\\PF_Project\\HardShipApplicationBackEnd\\HardShipAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

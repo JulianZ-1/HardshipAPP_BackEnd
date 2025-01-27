@@ -71,7 +71,7 @@ namespace HardshipAPI.Controllers
 
         [HttpPut("edit/{debtId}")]
         public async Task<ActionResult> UpdateHardship(
-                 [FromRoute] long debtId,
+                 [FromRoute] int debtId,
                  [FromBody] HardshipManagementUpdate request)
         {
             try
@@ -139,7 +139,7 @@ namespace HardshipAPI.Controllers
         }
 
         [HttpGet("get-debt/{debtId}")]
-        public async Task<ActionResult> GetHardshipByDebtId(long debtId)
+        public async Task<ActionResult> GetHardshipByDebtId(int debtId)
         {
             try
             {
