@@ -1,0 +1,65 @@
+[
+  {
+    "ContainingType": "HardshipAPI.Controllers.HardshipsController",
+    "Method": "CreateHardship",
+    "RelativePath": "Hardships",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HardshipAPI.Models.HardshipManagementInsert",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HardshipAPI.Controllers.HardshipsController",
+    "Method": "ViewAllHardships",
+    "RelativePath": "Hardships",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HardshipAPI.Controllers.HardshipsController",
+    "Method": "UpdateHardship",
+    "RelativePath": "Hardships/edit/{debtId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "debtId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "HardshipAPI.Models.HardshipManagementUpdate",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HardshipAPI.Controllers.HardshipsController",
+    "Method": "GetHardshipByDebtId",
+    "RelativePath": "Hardships/get-debt/{debtId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "debtId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
