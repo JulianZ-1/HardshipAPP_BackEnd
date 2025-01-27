@@ -20,16 +20,20 @@ namespace HardshipAPI.Services
             InitializeDatabase();
         }
 
+        // Creates and returns a new SQLite connection
         public SQLiteConnection GetConnection() => new SQLiteConnection(_connectionString);
 
+        // Initializes database if it doesn't exist
         public void InitializeDatabase()
         {
             if (!File.Exists(_dbPath))
             {
+                // Create new database file
                 SQLiteConnection.CreateFile(_dbPath);
                 using var connection = GetConnection();
                 connection.Open();
 
+                // Open connection and create tables
                 CreateTables(connection);
             }
         }
@@ -75,6 +79,7 @@ namespace HardshipAPI.Services
             
             ");
 
+            // Insert test debt records with placeholder data
             ExecuteNonQuery(connection, @"
             INSERT INTO Debt (Name, DOB, Income, Expenses)
             VALUES

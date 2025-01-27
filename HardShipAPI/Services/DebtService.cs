@@ -6,7 +6,7 @@ namespace HardshipAPI.Services
     public interface IDebtService
     {
         Task<long> UpdateDebt(Debt debt);
-        Debt? GetDebt(int debtId);
+        Debt? GetDebt(long debtId);
     }
     public class DebtService : IDebtService
     {
@@ -16,6 +16,7 @@ namespace HardshipAPI.Services
         {
             _sqliteService = sqliteService;
         }
+
         public async Task<long> UpdateDebt(Debt debt)
         {
             await using var connection = _sqliteService.GetConnection();
@@ -40,7 +41,7 @@ namespace HardshipAPI.Services
             return await cmd.ExecuteNonQueryAsync();
         }
 
-        public Debt? GetDebt(int debtId)
+        public Debt? GetDebt(long debtId)
         {
             using var connection = _sqliteService.GetConnection();
             connection.Open();

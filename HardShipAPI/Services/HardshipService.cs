@@ -9,9 +9,10 @@ namespace HardshipAPI.Services
         Task<long> AddHardship(HardshipInsert hardship);
         Task<long> UpdateHardship(HardshipUpdate hardship);
         Task<HardshipManagementView[]> ViewAllHardShips();
-        Hardship? GetHardship(int hardshipId);
-        Task<bool> DoesDebtHaveHardshipAsync(int debtId); // Add this line
-        Task<HardshipManagementView?> GetHardshipByDebtIdAsync(int debtId); // Add this line
+        Hardship? GetHardship(long hardshipId);
+        Task<bool> DoesDebtHaveHardshipAsync(long debtId);
+        Task<HardshipManagementView?> GetHardshipByDebtIdAsync(long debtId);
+        Task<bool> DoesDebtExist(long debtId);
 
     }
     public class HardshipService : IHardshipService
@@ -59,7 +60,7 @@ namespace HardshipAPI.Services
             return await cmd.ExecuteNonQueryAsync();
         }
 
-        public Hardship? GetHardship(int hardshipId)
+        public Hardship? GetHardship(long hardshipId)
         {
             using var connection = _sqliteService.GetConnection();
             connection.Open();
@@ -117,7 +118,7 @@ namespace HardshipAPI.Services
             }
             return results.ToArray();
         }
-        public async Task<bool> DoesDebtHaveHardshipAsync(int debtId)
+        public async Task<bool> DoesDebtHaveHardshipAsync(long debtId)
         {
             await using var connection = _sqliteService.GetConnection();
             await connection.OpenAsync();
@@ -130,7 +131,20 @@ namespace HardshipAPI.Services
             return result != null;
         }
 
-        public async Task<HardshipManagementView?> GetHardshipByDebtIdAsync(int debtId)
+        public async Task<bool> DoesDebtExist(long debtId)
+        {
+            await using var connection = _sqliteService.GetConnection();
+            await connection.OpenAsync();
+
+            const string query = "SELECT 1 FROM Debt WHERE DebtID = @DebtID";
+            using var cmd = new SQLiteCommand(query, connection);
+            cmd.Parameters.AddWithValue("@DebtID", debtId);
+
+            var result = await cmd.ExecuteScalarAsync();
+            return result != null;
+        }
+
+        public async Task<HardshipManagementView?> GetHardshipByDebtIdAsync(long debtId)
         {
             await using var connection = _sqliteService.GetConnection();
             await connection.OpenAsync();
@@ -141,7 +155,7 @@ namespace HardshipAPI.Services
             INNER JOIN Debt AS d ON d.DebtID = h.DebtID
             INNER JOIN HardshipTypes AS ht ON ht.HardshipTypeID = h.HardshipTypeID
             WHERE h.DebtID = @DebtID
-            LIMIT 1"; // DebtID is unique, so only 1 result
+            LIMIT 1";
 
             using var cmd = new SQLiteCommand(query, connection);
             cmd.Parameters.AddWithValue("@DebtID", debtId);
@@ -163,7 +177,7 @@ namespace HardshipAPI.Services
                 };
             }
 
-            return null; // No matching record
+            return null;
         }
     }
 }

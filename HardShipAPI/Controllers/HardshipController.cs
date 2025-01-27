@@ -17,18 +17,25 @@ namespace HardshipAPI.Controllers
             _debtService = debtService;
         }
 
-        /// (1) POST: Insert a new Hardship record.
         [HttpPost()]
         public async Task<ActionResult> CreateHardship([FromBody] HardshipManagementInsert request)
         {
             try
             {
+                //return not found when DebtID doesn't exist or the DebtID already has a hardship
                 bool debtHasHardship = await _hardshipServices.DoesDebtHaveHardshipAsync(request.DebtID);
+                bool doesDebtExist = await _hardshipServices.DoesDebtExist(request.DebtID);
+
+                if (!doesDebtExist)
+                {
+                    return NotFound($"DebtID {request.DebtID} does not exist in the table");
+                }
 
                 if (debtHasHardship)
                 {
-                    return Problem($"DebtID {request.DebtID} already has a hardship.");
+                    return NotFound($"DebtID {request.DebtID} already has a hardship.");
                 }
+
 
                 var hardshipDTO = new HardshipInsert {
                     Comments = request.Comments,
@@ -36,6 +43,7 @@ namespace HardshipAPI.Controllers
                     DebtID = request.DebtID,
                 };
                 var hardship = await _hardshipServices.AddHardship(hardshipDTO);
+
                 if (hardship > 0)
                 {
                     var debtDTO = new Debt
@@ -65,13 +73,13 @@ namespace HardshipAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Problem("An error occurred while creating a hardship.");
+                return BadRequest("An error occurred while creating a hardship.");
             }
         }
 
         [HttpPut("edit/{debtId}")]
         public async Task<ActionResult> UpdateHardship(
-                 [FromRoute] int debtId,
+                 [FromRoute] long debtId,
                  [FromBody] HardshipManagementUpdate request)
         {
             try
@@ -112,7 +120,7 @@ namespace HardshipAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Problem($"An error occurred: {ex.Message}");
+                return BadRequest($"An error occurred: {ex.Message}");
             }
         }
 
@@ -139,7 +147,7 @@ namespace HardshipAPI.Controllers
         }
 
         [HttpGet("get-debt/{debtId}")]
-        public async Task<ActionResult> GetHardshipByDebtId(int debtId)
+        public async Task<ActionResult> GetHardshipByDebtId(long debtId)
         {
             try
             {
@@ -155,7 +163,7 @@ namespace HardshipAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Problem($"An error occurred: {ex.Message}");
+                return BadRequest($"An error occurred: {ex.Message}");
             }
         }
     }
